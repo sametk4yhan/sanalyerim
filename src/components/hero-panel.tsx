@@ -4,6 +4,15 @@ import { TrackedLink } from "@/components/tracked-link";
 import { siteContent } from "@/content/site";
 import styles from "@/app/page.module.css";
 
+function formatHref(href: string) {
+  try {
+    const url = new URL(href);
+    return `${url.hostname}${url.pathname === "/" ? "" : url.pathname}`;
+  } catch {
+    return href.replace(/^https?:\/\//, "").replace(/\/$/, "");
+  }
+}
+
 export function HeroPanel() {
   const { hero, work } = siteContent;
 
@@ -63,9 +72,11 @@ export function HeroPanel() {
                     ) : item.iconLabel ? (
                       <span className={styles.workMonogram}>{item.iconLabel}</span>
                     ) : null}
-                    <span className={styles.workLineTitle}>{item.title}</span>
+                    <span className={styles.workLineText}>
+                      <span className={styles.workLineTitle}>{item.title}</span>
+                      <span className={styles.workLineHref}>{formatHref(item.href)}</span>
+                    </span>
                   </span>
-                  <span className={styles.workLineArrow}>↗</span>
                 </TrackedLink>
               ))}
             </div>
@@ -79,7 +90,19 @@ export function HeroPanel() {
             <div className={styles.workListCompact}>
               {work.mobile.map((item) => (
                 <div key={item.title} className={styles.workLineStores}>
-                  <span className={styles.workLineTitle}>{item.title}</span>
+                  <span className={styles.workLineLead}>
+                    {item.iconSrc ? (
+                      <Image
+                        alt={`${item.title} icon`}
+                        className={styles.workFavicon}
+                        height={18}
+                        src={item.iconSrc}
+                        unoptimized
+                        width={18}
+                      />
+                    ) : null}
+                    <span className={styles.workLineTitle}>{item.title}</span>
+                  </span>
                   <div className={styles.storeIcons}>
                     {item.storeLinks?.map((store) =>
                       store.href ? (
@@ -94,11 +117,11 @@ export function HeroPanel() {
                           }}
                           href={store.href}
                         >
-                          <Image alt={store.label} className={styles.storeIconImage} height={22} src={store.iconSrc} width={22} />
+                          <span className={styles.storeBadgeText}>{store.label}</span>
                         </TrackedLink>
                       ) : (
                         <span key={store.label} aria-disabled="true" className={styles.storeIconDisabled}>
-                          <Image alt={store.label} className={styles.storeIconImage} height={22} src={store.iconSrc} width={22} />
+                          <span className={styles.storeBadgeText}>{store.label}</span>
                         </span>
                       ),
                     )}

@@ -60,7 +60,6 @@ export function ProfileCard() {
       </div>
 
       <div className={styles.profileMeta}>
-        <p className={styles.profileRole}>{profile.role}</p>
         <h2 className={styles.profileName}>{profile.name}</h2>
       </div>
 

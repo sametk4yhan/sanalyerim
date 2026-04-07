@@ -29,11 +29,12 @@ export default function Home() {
           </div>
 
           <div className={styles.footerBlock}>
-            <p>İlgi Alanları</p>
+            <p>Interests</p>
             <div className={`${styles.tokenList} ${styles.interestsList}`}>
               {siteContent.interests.map((item) => (
-                <span key={item} className={styles.token}>
-                  {item}
+                <span key={item.label} className={styles.token}>
+                  <img alt="" aria-hidden="true" className={styles.tokenIcon} src={item.iconSrc} />
+                  <span>{item.label}</span>
                 </span>
               ))}
             </div>

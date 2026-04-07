@@ -12,6 +12,11 @@ export type TechnicalSkill = {
   iconSrc: string;
 };
 
+export type InterestItem = {
+  label: string;
+  iconSrc: string;
+};
+
 export type StoreLink = {
   label: string;
   href?: string;
@@ -27,6 +32,8 @@ export type WorkLink = {
   iconLabel?: string;
   storeLinks?: StoreLink[];
 };
+
+const svgIcon = (svg: string) => `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
 
 export const siteContent = {
   profile: {
@@ -74,6 +81,7 @@ export const siteContent = {
         href: "https://apps.apple.com/tr/app/promptdex-prompt-k%C3%BCt%C3%BCphanesi/id6758352180?l=tr",
         note: "Open link",
         category: "mobile",
+        iconSrc: "https://www.google.com/s2/favicons?sz=64&domain=promptdex.app",
         storeLinks: [
           {
             label: "App Store",
@@ -98,5 +106,30 @@ export const siteContent = {
     { label: "Expo", iconSrc: "https://cdn.worldvectorlogo.com/logos/expo-1.svg" },
     { label: "Figma", iconSrc: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/figma/figma-original.svg" },
   ] satisfies TechnicalSkill[],
-  interests: ["Product Design", "Mobile UX", "Design Systems", "AI Tools", "Artificial Intelligence", "Digital Branding"],
+  interests: [
+    {
+      label: "Product Design",
+      iconSrc: svgIcon(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><rect x="3" y="5" width="18" height="14" rx="4" fill="#FF7A59"/><rect x="7" y="9" width="10" height="6" rx="2" fill="#FFD2C6"/></svg>`),
+    },
+    {
+      label: "Mobile UX",
+      iconSrc: svgIcon(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><rect x="6" y="2.5" width="12" height="19" rx="3.5" fill="#34C3FF"/><rect x="9" y="5.5" width="6" height="11" rx="1.5" fill="#D8F4FF"/><circle cx="12" cy="18.5" r="1.2" fill="#0A6F9A"/></svg>`),
+    },
+    {
+      label: "Design Systems",
+      iconSrc: svgIcon(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="8" height="8" rx="2.2" fill="#8B5CF6"/><rect x="13" y="3" width="8" height="8" rx="2.2" fill="#38BDF8"/><rect x="3" y="13" width="8" height="8" rx="2.2" fill="#F472B6"/><rect x="13" y="13" width="8" height="8" rx="2.2" fill="#22C55E"/></svg>`),
+    },
+    {
+      label: "AI Tools",
+      iconSrc: svgIcon(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M12 2l2.2 4.8L19 9l-4.8 2.2L12 16l-2.2-4.8L5 9l4.8-2.2L12 2z" fill="#7CFF8F"/><circle cx="18.5" cy="18.5" r="2.5" fill="#00C2A8"/></svg>`),
+    },
+    {
+      label: "Artificial Intelligence",
+      iconSrc: svgIcon(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><circle cx="8" cy="8" r="3" fill="#A855F7"/><circle cx="16.5" cy="6.5" r="2.5" fill="#EC4899"/><circle cx="16" cy="16" r="3.5" fill="#6366F1"/><path d="M10.5 9.5L14 8M10 10.5L14 14" stroke="#E9D5FF" stroke-width="1.6" stroke-linecap="round"/></svg>`),
+    },
+    {
+      label: "Digital Branding",
+      iconSrc: svgIcon(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"><path d="M12 2l2.1 5.3L20 9.4l-4.5 3.7 1.4 5.7L12 15.8l-4.9 3 1.4-5.7L4 9.4l5.9-2.1L12 2z" fill="#FBBF24"/><circle cx="12" cy="12" r="2.2" fill="#FFF2B3"/></svg>`),
+    },
+  ] satisfies InterestItem[],
 } as const;

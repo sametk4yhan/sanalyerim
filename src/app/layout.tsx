@@ -14,9 +14,44 @@ const bodyFont = Manrope({
   subsets: ["latin"],
 });
 
+const siteUrl = new URL("https://sanalyerim.com");
+const title = "Samet Kayhan | Sanalyerim";
+const description = "Personal hub for web, mobile, and selected digital work.";
+const previewImage = "/og-image.png";
+
 export const metadata: Metadata = {
-  title: "Samet Kayhan | Sanalyerim",
-  description: "Personal hub for web, mobile, and selected digital work.",
+  metadataBase: siteUrl,
+  title,
+  description,
+  applicationName: "Sanalyerim",
+  keywords: ["Samet Kayhan", "Sanalyerim", "Web Design", "Mobile App Developer", "Portfolio"],
+  icons: {
+    icon: "/favicon.png",
+    shortcut: "/favicon.png",
+    apple: "/favicon.png",
+  },
+  openGraph: {
+    type: "website",
+    url: siteUrl,
+    title,
+    description,
+    siteName: "Sanalyerim",
+    locale: "tr_TR",
+    images: [
+      {
+        url: previewImage,
+        width: 1200,
+        height: 630,
+        alt: "Sanalyerim preview card",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+    images: [previewImage],
+  },
 };
 
 const GA_MEASUREMENT_ID = "G-MBJMH9326K";
