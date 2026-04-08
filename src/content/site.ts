@@ -79,6 +79,7 @@ export const siteContent = {
     web: [
       { title: "Promptdex Web", href: "https://promptdex.app/tr", note: "Open link", category: "web", iconSrc: "https://www.google.com/s2/favicons?sz=64&domain=promptdex.app" },
       { title: "Tasarım Ajansı", href: "https://sametk4yhan.com/", note: "Open link", category: "web", iconSrc: "https://www.google.com/s2/favicons?sz=64&domain=sametk4yhan.com" },
+      { title: "Motiff", href: "https://motiff-alpha.vercel.app/", note: "Open link", category: "web", iconSrc: "https://motiff-alpha.vercel.app/icon.svg" },
       { title: "İyilik Hareketi", href: "https://iyilikhareketi.online/", note: "Open link", category: "web", iconLabel: "İH" },
     ] satisfies WorkLink[],
     mobile: [
