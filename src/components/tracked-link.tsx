@@ -7,6 +7,7 @@ type TrackedLinkProps = {
   className?: string;
   event: LinkEvent;
   children: React.ReactNode;
+  onClick?: () => void;
 };
 
 export function TrackedLink({
@@ -14,6 +15,7 @@ export function TrackedLink({
   className,
   event,
   children,
+  onClick,
 }: TrackedLinkProps) {
   const isExternal = href.startsWith("http");
 
@@ -21,7 +23,10 @@ export function TrackedLink({
     <a
       className={className}
       href={href}
-      onClick={() => trackLinkEvent(event)}
+      onClick={() => {
+        trackLinkEvent(event);
+        onClick?.();
+      }}
       rel={isExternal ? "noreferrer" : undefined}
       target={isExternal ? "_blank" : undefined}
     >

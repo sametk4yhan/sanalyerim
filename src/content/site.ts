@@ -39,6 +39,12 @@ export const siteContent = {
   profile: {
     name: "Samet Kayhan",
     role: "WEB DESIGNER",
+    rotatingTitles: [
+      "Web Design",
+      "Mobile App Developer",
+      "Frontend Developer",
+      "Product Builder",
+    ],
     portrait: {
       src: "/profile.jpg",
       alt: "Samet Kayhan portrait placeholder",
@@ -77,7 +83,7 @@ export const siteContent = {
     ] satisfies WorkLink[],
     mobile: [
       {
-        title: "Promptdex",
+        title: "Promptdex: AI Prompt Library",
         href: "https://apps.apple.com/tr/app/promptdex-prompt-k%C3%BCt%C3%BCphanesi/id6758352180?l=tr",
         note: "Open link",
         category: "mobile",
@@ -96,16 +102,40 @@ export const siteContent = {
       },
     ] satisfies WorkLink[],
   },
+  blog: [
+    {
+      title: "Prompt systems for real people",
+      excerpt: "Building prompt products means reducing cognitive load, not increasing prompt complexity.",
+      meta: "Draft essay",
+      status: "Soon",
+    },
+    {
+      title: "Why compact landing pages convert",
+      excerpt: "A tighter hierarchy can carry both personal identity and product traffic without feeling like a directory.",
+      meta: "Field note",
+      status: "Draft",
+    },
+    {
+      title: "Designing with signal, not noise",
+      excerpt: "Fewer surfaces, clearer motion, and stronger contrast usually outperform ornamental density.",
+      meta: "Studio log",
+      status: "Open",
+    },
+  ],
   technicalSkills: [
     { label: "Next.js", iconSrc: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/nextjs/nextjs-original.svg" },
-    { label: "Adobe", iconSrc: "https://cdn.worldvectorlogo.com/logos/adobe-2.svg" },
-    { label: "React", iconSrc: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" },
-    { label: "WordPress", iconSrc: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/wordpress/wordpress-plain.svg" },
     { label: "TypeScript", iconSrc: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg" },
-    { label: "React Native", iconSrc: "https://cdn.worldvectorlogo.com/logos/react-native-1.svg" },
     { label: "Expo", iconSrc: "https://cdn.worldvectorlogo.com/logos/expo-1.svg" },
+    { label: "React", iconSrc: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" },
+    { label: "Cursor", iconSrc: "https://registry.npmmirror.com/@lobehub/icons-static-png/latest/files/dark/cursor.png" },
+    { label: "React Native", iconSrc: "https://cdn.worldvectorlogo.com/logos/react-native-1.svg" },
+    { label: "Supabase", iconSrc: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/supabase/supabase-original.svg" },
+    { label: "Adobe", iconSrc: "https://cdn.worldvectorlogo.com/logos/adobe-2.svg" },
     { label: "Figma", iconSrc: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/figma/figma-original.svg" },
   ] satisfies TechnicalSkill[],
+  now: [
+    "Chicko App :)",
+  ],
   interests: [
     {
       label: "Product Design",

@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import { RotatingRole } from "@/components/rotating-role";
 import { TrackedLink } from "@/components/tracked-link";
 import { siteContent } from "@/content/site";
 import styles from "@/app/page.module.css";
@@ -21,7 +24,7 @@ export function ProfileCard() {
             <Image
               alt=""
               aria-hidden="true"
-              className={`${styles.portraitImage} ${styles.portraitBandOne}`}
+              className={`${styles.portraitImage} ${styles.portraitTearLayer} ${styles.portraitTearLayerOne}`}
               fill
               sizes="(max-width: 1100px) 100vw, 360px"
               src={profile.portrait.src}
@@ -29,23 +32,7 @@ export function ProfileCard() {
             <Image
               alt=""
               aria-hidden="true"
-              className={`${styles.portraitImage} ${styles.portraitBandTwo}`}
-              fill
-              sizes="(max-width: 1100px) 100vw, 360px"
-              src={profile.portrait.src}
-            />
-            <Image
-              alt=""
-              aria-hidden="true"
-              className={`${styles.portraitImage} ${styles.portraitBandThree}`}
-              fill
-              sizes="(max-width: 1100px) 100vw, 360px"
-              src={profile.portrait.src}
-            />
-            <Image
-              alt=""
-              aria-hidden="true"
-              className={`${styles.portraitImage} ${styles.portraitBandFour}`}
+              className={`${styles.portraitImage} ${styles.portraitTearLayer} ${styles.portraitTearLayerTwo}`}
               fill
               sizes="(max-width: 1100px) 100vw, 360px"
               src={profile.portrait.src}
@@ -61,6 +48,11 @@ export function ProfileCard() {
 
       <div className={styles.profileMeta}>
         <h2 className={styles.profileName}>{profile.name}</h2>
+        <RotatingRole
+          className={styles.profileRoleMobileWrap}
+          itemClassName={styles.profileRoleMobile}
+          roles={profile.rotatingTitles}
+        />
       </div>
 
       <div className={styles.socialRow}>

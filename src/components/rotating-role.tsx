@@ -8,16 +8,34 @@ type RotatingRoleProps = {
   itemClassName?: string;
 };
 
+const ROTATION_MS = 3200;
+
 export function RotatingRole({ roles, className, itemClassName }: RotatingRoleProps) {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
-    const intervalId = window.setInterval(() => {
-      setIndex((current) => (current + 1) % roles.length);
-    }, 3200);
+    if (!roles.length) {
+      return;
+    }
 
-    return () => window.clearInterval(intervalId);
-  }, [roles.length]);
+    const getSyncedIndex = () => Math.floor(Date.now() / ROTATION_MS) % roles.length;
+
+    let intervalId: number | undefined;
+    const updateIndex = () => setIndex(getSyncedIndex());
+    updateIndex();
+
+    const timeoutId = window.setTimeout(() => {
+      updateIndex();
+      intervalId = window.setInterval(updateIndex, ROTATION_MS);
+    }, ROTATION_MS - (Date.now() % ROTATION_MS));
+
+    return () => {
+      window.clearTimeout(timeoutId);
+      if (intervalId) {
+        window.clearInterval(intervalId);
+      }
+    };
+  }, [roles]);
 
   return (
     <div aria-live="polite" className={className}>
