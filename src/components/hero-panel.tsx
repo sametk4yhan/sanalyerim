@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { RotatingRole } from "@/components/rotating-role";
 import { TrackedLink } from "@/components/tracked-link";
-import { siteContent } from "@/content/site";
+import { siteContent, type WorkLink } from "@/content/site";
 import styles from "@/app/page.module.css";
 
 export type DesktopView = "work" | "tech" | "interests" | "now" | "blog";
@@ -12,13 +12,99 @@ type HeroPanelProps = {
   activeView: DesktopView;
 };
 
-function formatHref(href: string) {
-  try {
-    const url = new URL(href);
-    return `${url.hostname}${url.pathname === "/" ? "" : url.pathname}`;
-  } catch {
-    return href.replace(/^https?:\/\//, "").replace(/\/$/, "");
-  }
+function WebProjectCards({ items }: { items: WorkLink[] }) {
+  return (
+    <div className={styles.webCardList}>
+      {items.map((item) => (
+        <TrackedLink
+          key={item.title}
+          className={styles.webProjectCard}
+          event={{
+            category: item.category,
+            label: item.title,
+            href: item.href,
+            location: "web-list",
+          }}
+          href={item.href}
+        >
+          <span aria-hidden="true" className={styles.webProjectCardPlate} />
+          <span className={styles.webProjectCardSurface}>
+            <span className={styles.webProjectCardMeta}>
+              <span className={styles.webProjectCardTitleRow}>
+                <span className={styles.webProjectCardIcon}>
+                  {item.iconSrc ? (
+                    <Image
+                      alt={`${item.title} icon`}
+                      className={styles.webProjectCardIconImage}
+                      height={18}
+                      src={item.iconSrc}
+                      unoptimized
+                      width={18}
+                    />
+                  ) : item.iconLabel ? (
+                    <span className={styles.workMonogram}>{item.iconLabel}</span>
+                  ) : null}
+                </span>
+                <span className={styles.webProjectCardTitle}>{item.title}</span>
+              </span>
+            </span>
+          </span>
+        </TrackedLink>
+      ))}
+    </div>
+  );
+}
+
+function MobileProjectCards({ items }: { items: WorkLink[] }) {
+  return (
+    <div className={styles.mobileProjectCardList}>
+      {items.map((item) => (
+        <div key={item.title} className={styles.mobileProjectCard}>
+          <span aria-hidden="true" className={styles.mobileProjectCardPlate} />
+          <div className={styles.mobileProjectCardSurface}>
+            <span className={styles.mobileProjectTitleRow}>
+              <span className={styles.mobileProjectIcon}>
+                {item.iconSrc ? (
+                  <Image
+                    alt={`${item.title} icon`}
+                    className={styles.mobileProjectIconImage}
+                    height={20}
+                    src={item.iconSrc}
+                    unoptimized
+                    width={20}
+                  />
+                ) : null}
+              </span>
+              <span className={styles.mobileProjectTitle}>{item.title}</span>
+              <span className={styles.mobileProjectStoreRow}>
+                {item.storeLinks?.map((store) =>
+                  store.href ? (
+                    <TrackedLink
+                      key={store.label}
+                      className={styles.mobileProjectStoreLink}
+                      event={{
+                        category: item.category,
+                        label: `${item.title} ${store.label}`,
+                        href: store.href,
+                        location: "mobile-store-icons",
+                      }}
+                      href={store.href}
+                    >
+                      <span className={styles.mobileProjectStoreText}>{store.label}</span>
+                    </TrackedLink>
+                  ) : (
+                    <span key={store.label} aria-disabled="true" className={styles.mobileProjectStoreDisabled}>
+                      <span className={styles.mobileProjectStoreText}>{store.label}</span>
+                    </span>
+                  ),
+                )}
+              </span>
+            </span>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
 }
 
 function WorkContent() {
@@ -37,40 +123,7 @@ function WorkContent() {
             <h2>WEB</h2>
           </div>
 
-          <div className={styles.workListCompact}>
-            {work.web.map((item) => (
-              <TrackedLink
-                key={item.title}
-                className={styles.workLine}
-                event={{
-                  category: item.category,
-                  label: item.title,
-                  href: item.href,
-                  location: "web-list",
-                }}
-                href={item.href}
-              >
-                <span className={styles.workLineLead}>
-                  {item.iconSrc ? (
-                    <Image
-                      alt={`${item.title} icon`}
-                      className={styles.workFavicon}
-                      height={18}
-                      src={item.iconSrc}
-                      unoptimized
-                      width={18}
-                    />
-                  ) : item.iconLabel ? (
-                    <span className={styles.workMonogram}>{item.iconLabel}</span>
-                  ) : null}
-                  <span className={styles.workLineText}>
-                    <span className={styles.workLineTitle}>{item.title}</span>
-                    <span className={styles.workLineHref}>{formatHref(item.href)}</span>
-                  </span>
-                </span>
-              </TrackedLink>
-            ))}
-          </div>
+          <WebProjectCards items={work.web} />
         </article>
 
         <article className={styles.workColumn} id="mobile">
@@ -78,48 +131,7 @@ function WorkContent() {
             <h2>MOBILE</h2>
           </div>
 
-          <div className={styles.workListCompact}>
-            {work.mobile.map((item) => (
-              <div key={item.title} className={styles.workLineStores}>
-                <span className={styles.workLineLead}>
-                  {item.iconSrc ? (
-                    <Image
-                      alt={`${item.title} icon`}
-                      className={styles.workFavicon}
-                      height={18}
-                      src={item.iconSrc}
-                      unoptimized
-                      width={18}
-                    />
-                  ) : null}
-                  <span className={styles.workLineTitle}>{item.title}</span>
-                </span>
-                <div className={styles.storeIcons}>
-                  {item.storeLinks?.map((store) =>
-                    store.href ? (
-                      <TrackedLink
-                        key={store.label}
-                        className={styles.storeIconLink}
-                        event={{
-                          category: item.category,
-                          label: `${item.title} ${store.label}`,
-                          href: store.href,
-                          location: "mobile-store-icons",
-                        }}
-                        href={store.href}
-                      >
-                        <span className={styles.storeBadgeText}>{store.label}</span>
-                      </TrackedLink>
-                    ) : (
-                      <span key={store.label} aria-disabled="true" className={styles.storeIconDisabled}>
-                        <span className={styles.storeBadgeText}>{store.label}</span>
-                      </span>
-                    ),
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
+          <MobileProjectCards items={work.mobile} />
         </article>
       </div>
     </div>
@@ -256,40 +268,7 @@ export function HeroPanel({ activeView }: HeroPanelProps) {
               <h2>WEB</h2>
             </div>
 
-            <div className={styles.workListCompact}>
-              {work.web.map((item) => (
-                <TrackedLink
-                  key={item.title}
-                  className={styles.workLine}
-                  event={{
-                    category: item.category,
-                    label: item.title,
-                    href: item.href,
-                    location: "web-list",
-                  }}
-                  href={item.href}
-                >
-                  <span className={styles.workLineLead}>
-                    {item.iconSrc ? (
-                      <Image
-                        alt={`${item.title} icon`}
-                        className={styles.workFavicon}
-                        height={18}
-                        src={item.iconSrc}
-                        unoptimized
-                        width={18}
-                      />
-                    ) : item.iconLabel ? (
-                      <span className={styles.workMonogram}>{item.iconLabel}</span>
-                    ) : null}
-                    <span className={styles.workLineText}>
-                      <span className={styles.workLineTitle}>{item.title}</span>
-                      <span className={styles.workLineHref}>{formatHref(item.href)}</span>
-                    </span>
-                  </span>
-                </TrackedLink>
-              ))}
-            </div>
+            <WebProjectCards items={work.web} />
           </article>
 
           <article className={styles.workColumn} id="mobile-panel">
@@ -297,48 +276,7 @@ export function HeroPanel({ activeView }: HeroPanelProps) {
               <h2>MOBILE</h2>
             </div>
 
-            <div className={styles.workListCompact}>
-              {work.mobile.map((item) => (
-                <div key={item.title} className={styles.workLineStores}>
-                  <span className={styles.workLineLead}>
-                    {item.iconSrc ? (
-                      <Image
-                        alt={`${item.title} icon`}
-                        className={styles.workFavicon}
-                        height={18}
-                        src={item.iconSrc}
-                        unoptimized
-                        width={18}
-                      />
-                    ) : null}
-                    <span className={styles.workLineTitle}>{item.title}</span>
-                  </span>
-                  <div className={styles.storeIcons}>
-                    {item.storeLinks?.map((store) =>
-                      store.href ? (
-                        <TrackedLink
-                          key={store.label}
-                          className={styles.storeIconLink}
-                          event={{
-                            category: item.category,
-                            label: `${item.title} ${store.label}`,
-                            href: store.href,
-                            location: "mobile-store-icons",
-                          }}
-                          href={store.href}
-                        >
-                          <span className={styles.storeBadgeText}>{store.label}</span>
-                        </TrackedLink>
-                      ) : (
-                        <span key={store.label} aria-disabled="true" className={styles.storeIconDisabled}>
-                          <span className={styles.storeBadgeText}>{store.label}</span>
-                        </span>
-                      ),
-                    )}
-                  </div>
-                </div>
-              ))}
-            </div>
+            <MobileProjectCards items={work.mobile} />
           </article>
         </div>
       </section>
