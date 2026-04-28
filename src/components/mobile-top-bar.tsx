@@ -12,6 +12,8 @@ export function MobileTopBar() {
 
   const promptdexMobile = work.mobile[0];
   const promptdexAppHref = promptdexMobile.storeLinks?.find((item) => item.href)?.href ?? promptdexMobile.href;
+  const forktMobile = work.mobile[1];
+  const forktAppHref = forktMobile?.storeLinks?.find((item) => item.href)?.href ?? forktMobile?.href;
 
   const quickLinks = [
     {
@@ -22,6 +24,18 @@ export function MobileTopBar() {
       label: "Promptdex App Store",
       tone: "primary",
     },
+    ...(forktMobile && forktAppHref
+      ? [
+          {
+            title: "Forkt App",
+            note: "App Store",
+            href: forktAppHref,
+            category: "mobile" as const,
+            label: "Forkt App Store",
+            tone: "primary",
+          },
+        ]
+      : []),
     {
       title: "Promptdex Web",
       note: "Website",
