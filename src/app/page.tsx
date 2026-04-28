@@ -1,5 +1,7 @@
 import { DesktopShell } from "@/components/desktop-shell";
+import { MagneticCursor } from "@/components/magnetic-cursor";
 import { MobileTopBar } from "@/components/mobile-top-bar";
+import { Terminal } from "@/components/terminal";
 import styles from "./page.module.css";
 
 export default function Home() {
@@ -12,6 +14,8 @@ export default function Home() {
       </div>
       <MobileTopBar />
       <DesktopShell />
+      <Terminal />
+      <MagneticCursor />
     </main>
   );
 }

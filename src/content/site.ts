@@ -54,7 +54,7 @@ export const siteContent = {
       { label: "X", shortLabel: "X", href: "https://x.com/Sametk4yhan", category: "social" },
       { label: "Instagram", shortLabel: "Instagram", href: "https://www.instagram.com/sametk4yhan?igsh=eHUzN3F0ZGM3YWd5&utm_source=qr", category: "social" },
       { label: "Pinterest", shortLabel: "Pinterest", href: "https://pin.it/6F1xkb33M", category: "social" },
-      { label: "LinkedIn", shortLabel: "LinkedIn", href: "#", category: "social" },
+      { label: "LinkedIn", shortLabel: "LinkedIn", href: "https://www.linkedin.com/in/samet-kayhan-8405441a3", category: "social" },
       { label: "YouTube", shortLabel: "YouTube", href: "https://www.youtube.com/channel/UChT5ZJV2XQSut4acghCytSA", category: "social" },
     ] satisfies SocialLink[],
   },
@@ -101,6 +101,24 @@ export const siteContent = {
           },
         ],
       },
+      {
+        title: "Forkt - Would you Rather",
+        href: "https://apps.apple.com/tr/app/forkt-would-you-rather/id6759990583",
+        note: "Open link",
+        category: "mobile",
+        iconSrc: "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/45/6e/b3/456eb305-bf42-c102-49f9-8b6d17fd8672/AppIcon-0-0-1x_U007ephone-0-1-85-220.png/512x512bb.jpg",
+        storeLinks: [
+          {
+            label: "App Store",
+            href: "https://apps.apple.com/tr/app/forkt-would-you-rather/id6759990583",
+            iconSrc: "/icons/app-store.png",
+          },
+          {
+            label: "Google Play",
+            iconSrc: "/icons/google-play.png",
+          },
+        ],
+      },
     ] satisfies WorkLink[],
   },
   blog: [
@@ -134,9 +152,7 @@ export const siteContent = {
     { label: "Adobe", iconSrc: "https://cdn.worldvectorlogo.com/logos/adobe-2.svg" },
     { label: "Figma", iconSrc: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/figma/figma-original.svg" },
   ] satisfies TechnicalSkill[],
-  now: [
-    "Chicko App :)",
-  ],
+  now: [],
   interests: [
     {
       label: "Product Design",

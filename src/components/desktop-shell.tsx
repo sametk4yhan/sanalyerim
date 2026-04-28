@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, type SVGProps } from "react";
+import React, { useEffect, useState, type SVGProps } from "react";
 import { HeroPanel, type DesktopView } from "@/components/hero-panel";
 import { ProfileCard } from "@/components/profile-card";
 import { siteContent } from "@/content/site";
@@ -73,6 +73,17 @@ const navItems: NavItem[] = [
 
 export function DesktopShell() {
   const [activeView, setActiveView] = useState<DesktopView>("work");
+
+  useEffect(() => {
+    const handler = (e: Event) => {
+      const detail = (e as CustomEvent<string>).detail;
+      if (navItems.some((item) => item.view === detail)) {
+        setActiveView(detail as DesktopView);
+      }
+    };
+    window.addEventListener("samet:navigate", handler);
+    return () => window.removeEventListener("samet:navigate", handler);
+  }, []);
 
   return (
     <div className={styles.shell}>

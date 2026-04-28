@@ -4,10 +4,13 @@ import Image from "next/image";
 import { RotatingRole } from "@/components/rotating-role";
 import { TrackedLink } from "@/components/tracked-link";
 import { siteContent } from "@/content/site";
+import { useIsMac } from "@/lib/platform";
 import styles from "@/app/page.module.css";
 
 export function ProfileCard() {
   const { profile } = siteContent;
+  const isMac = useIsMac();
+  const modKey = isMac ? "⌘" : "Ctrl";
 
   return (
     <section className={styles.profilePanel}>
@@ -77,6 +80,10 @@ export function ProfileCard() {
         info@sametk4yhan.com
       </a>
 
+      <p className={styles.profileShortcutHint}>
+        Press <kbd className={styles.profileShortcutKbd}>{modKey}</kbd>
+        <kbd className={styles.profileShortcutKbd}>K</kbd> for terminal
+      </p>
     </section>
   );
 }

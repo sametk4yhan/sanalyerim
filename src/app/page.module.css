@@ -2095,3 +2095,318 @@
     height: 46px;
   }
 }
+
+/* Magnetic cursor */
+:global(body.hide-native-cursor),
+:global(body.hide-native-cursor *) {
+  cursor: none !important;
+}
+:global(body.hide-native-cursor) input,
+:global(body.hide-native-cursor) textarea {
+  cursor: text !important;
+}
+
+.cursorRing {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 32px;
+  height: 32px;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 999px;
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: difference;
+  transition: width 0.18s ease, height 0.18s ease, background 0.18s ease, border-color 0.18s ease;
+  will-change: transform;
+}
+
+.cursorDot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 4px;
+  background: #ffffff;
+  border-radius: 999px;
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: difference;
+  will-change: transform;
+}
+
+.cursorActive {
+  width: 56px;
+  height: 56px;
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.9);
+}
+
+@media (hover: none), (pointer: coarse) {
+  .cursorRing,
+  .cursorDot {
+    display: none;
+  }
+}
+
+/* Terminal */
+.terminalFab {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 30;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 9px 12px;
+  background: rgba(11, 11, 11, 0.78);
+  color: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  backdrop-filter: blur(14px);
+  cursor: pointer;
+  transition: background 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+}
+
+.terminalFab:hover {
+  background: rgba(20, 20, 20, 0.92);
+  border-color: rgba(255, 255, 255, 0.28);
+}
+
+.terminalFabKey {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  padding: 2px 5px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 5px;
+  font-size: 11px;
+}
+
+.terminalOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 14vh 20px 20px;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(8px);
+  animation: terminalFadeIn 0.18s ease-out;
+}
+
+@keyframes terminalFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.terminalWindow {
+  width: min(720px, 100%);
+  max-height: 64vh;
+  display: flex;
+  flex-direction: column;
+  background: rgba(12, 12, 14, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 13px;
+  animation: terminalSlideIn 0.22s ease-out;
+}
+
+@keyframes terminalSlideIn {
+  from { opacity: 0; transform: translateY(-8px) scale(0.985); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.terminalBar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: rgba(22, 22, 26, 0.95);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.terminalDot {
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.terminalDotClose { background: #ff5f57; }
+.terminalDotMin { background: #ffbd2e; }
+.terminalDotMax { background: #27c93f; }
+
+.terminalTitle {
+  margin-left: 8px;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 12px;
+  letter-spacing: 0.02em;
+}
+
+.terminalBody {
+  flex: 1;
+  overflow-y: auto;
+  padding: 14px 16px 16px;
+  color: rgba(232, 232, 232, 0.95);
+  line-height: 1.5;
+}
+
+.terminal_input { color: rgba(255, 255, 255, 0.95); }
+.terminal_output { color: rgba(220, 220, 220, 0.92); }
+.terminal_error { color: #ff7a7a; }
+.terminal_muted { color: rgba(255, 255, 255, 0.45); }
+
+.terminalInputRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-top: 4px;
+}
+
+.terminalPrompt {
+  color: #4ade80;
+}
+
+.terminalInput {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: inherit;
+  font: inherit;
+  caret-color: #4ade80;
+}
+
+.terminalFabLabel {
+  margin-left: 4px;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+}
+
+.terminalFabPulse {
+  position: fixed;
+}
+
+.terminalFabPulse::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  opacity: 0;
+  pointer-events: none;
+  animation: terminalFabPulse 2.4s ease-out infinite;
+}
+
+@keyframes terminalFabPulse {
+  0% { opacity: 0.55; transform: scale(1); }
+  60% { opacity: 0; transform: scale(1.35); }
+  100% { opacity: 0; transform: scale(1.35); }
+}
+
+.terminalToast {
+  position: fixed;
+  right: 20px;
+  bottom: 70px;
+  z-index: 31;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: rgba(20, 20, 22, 0.94);
+  color: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  font-size: 12.5px;
+  letter-spacing: 0.02em;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.5);
+  animation: terminalToastIn 0.32s ease-out, terminalToastIn 0.32s ease-out reverse 6.6s forwards;
+}
+
+@keyframes terminalToastIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.terminalToastDot {
+  width: 6px;
+  height: 6px;
+  background: #4ade80;
+  border-radius: 999px;
+  box-shadow: 0 0 0 4px rgba(74, 222, 128, 0.18);
+}
+
+.terminalToastKbd,
+.profileShortcutKbd {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  padding: 1px 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 5px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.terminalChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 10px 0 4px;
+  border-top: 1px dashed rgba(255, 255, 255, 0.08);
+  margin-top: 10px;
+}
+
+.terminalChip {
+  padding: 4px 10px;
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 11.5px;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.terminalChip:hover {
+  background: rgba(74, 222, 128, 0.12);
+  border-color: rgba(74, 222, 128, 0.35);
+  color: #d2ffe1;
+}
+
+.terminalInput::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.profileShortcutHint {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin: 8px 0 0;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.42);
+  letter-spacing: 0.02em;
+}
+
+@media (max-width: 640px) {
+  .terminalFab,
+  .terminalToast,
+  .profileShortcutHint { display: none; }
+  .terminalOverlay { padding: 8vh 12px 12px; }
+}
